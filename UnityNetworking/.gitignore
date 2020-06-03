@@ -9,7 +9,11 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
-/[Aa]ssets/_aProtonTutorial/
+
+# Proton tutorial should be hidden from the published repository
+/[Aa]ssets/_aProtonTutorial*
+/[Aa]ssets/_aProtonTutorial/*
+/[Aa]ssets/_aProtonTutorial/*.meta
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta

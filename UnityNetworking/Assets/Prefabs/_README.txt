@@ -1,0 +1,3 @@
+This folder is deticated to prefab assets that exist within a scene prior to, during, or after connection. These are prefabs that exist within a scene at the time of build, or at runtime through an object pool. Prefabs stored here cannot be instantiated during runtime and must exist within a scene. These prefabs can contain the ability (components or otherwise) to be synced over a network, but they just cannot be spawned after the scene is loaded.
+
+IMPORTATNT! If you have a prefab that will ever be instantiated through PhotonNetwork, it MUST be placed within the Assets/Resources/* directory either directly or indirectly. This is a Photon requirement.

@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Settings/Input/InputControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/GameData/Settings/Input/InputControls.inputactions'
 
 using System;
 using System.Collections;
@@ -46,6 +46,14 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""086f5de6-11ba-432a-b144-4e41384e2880"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Button"",
+                    ""id"": ""63a76eb8-6539-44b5-b947-01fe5f801cbe"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -150,6 +158,61 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""842f6c9d-84bd-4eb9-a00e-313b03bd8d97"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=0.2)"",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c71f06a8-2a67-4e40-9bfd-08a021e0e354"",
+                    ""path"": ""<Mouse>/delta/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1de3ae84-7f3c-4ce2-8e2e-31fd5ca32cc1"",
+                    ""path"": ""<Mouse>/delta/y"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a0bece5b-fdc9-481c-9fcd-3d969757d381"",
+                    ""path"": ""<Mouse>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""a94268c7-0f08-452c-aabe-72f6c6280015"",
+                    ""path"": ""<Mouse>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -179,6 +242,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         m_DevDefault_Vertical = m_DevDefault.FindAction("Vertical", throwIfNotFound: true);
         m_DevDefault_Jump = m_DevDefault.FindAction("Jump", throwIfNotFound: true);
         m_DevDefault_Fire = m_DevDefault.FindAction("Fire", throwIfNotFound: true);
+        m_DevDefault_Look = m_DevDefault.FindAction("Look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -232,6 +296,7 @@ public class @InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_DevDefault_Vertical;
     private readonly InputAction m_DevDefault_Jump;
     private readonly InputAction m_DevDefault_Fire;
+    private readonly InputAction m_DevDefault_Look;
     public struct DevDefaultActions
     {
         private @InputControls m_Wrapper;
@@ -240,6 +305,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         public InputAction @Vertical => m_Wrapper.m_DevDefault_Vertical;
         public InputAction @Jump => m_Wrapper.m_DevDefault_Jump;
         public InputAction @Fire => m_Wrapper.m_DevDefault_Fire;
+        public InputAction @Look => m_Wrapper.m_DevDefault_Look;
         public InputActionMap Get() { return m_Wrapper.m_DevDefault; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -261,6 +327,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Fire.started -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnFire;
+                @Look.started -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnLook;
             }
             m_Wrapper.m_DevDefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -277,6 +346,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
             }
         }
     }
@@ -296,5 +368,6 @@ public class @InputControls : IInputActionCollection, IDisposable
         void OnVertical(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }

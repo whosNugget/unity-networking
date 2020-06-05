@@ -1,0 +1,14 @@
+
+All required animtation directions:
+	|Left Diag Fwrd| |Fwrd| |Rght Diag Fwrd|
+	|Left Hriz Strf| |Idle| |Rght Hris Strf|
+	|Left Diag Back| |Back| |Rght Diag Back|
+	
+	|Rot Left| |Rot Rght|
+	
+	Needs variations for the following auxillaries:
+		|Stand| |Jog| |Sprint| |Crouch| |Crawl|
+	
+All auxillary animations:
+
+	|Jump| |Crouch| |Crawl| |Vault|

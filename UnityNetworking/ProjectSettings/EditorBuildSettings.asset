@@ -6,20 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_aProtonTutorial/Scenes/Dev_Launcher.unity
-    guid: e8b31c90fc79c5f4b80ba8f7067feb44
+    path: Assets/Scenes/Launcher.unity
+    guid: 8d7f2340107fb9e4dbc1f5d7868bc9a8
   - enabled: 1
-    path: Assets/_aProtonTutorial/Scenes/Room for 1.unity
-    guid: 1cc42d387105bc34384cf387b3c0a246
-  - enabled: 1
-    path: Assets/_aProtonTutorial/Scenes/Room for 2.unity
-    guid: 861cee167c2efbe479cb92af7cc3d9da
-  - enabled: 1
-    path: Assets/_aProtonTutorial/Scenes/Room for 3.unity
-    guid: adae437263faf0e4d9e2fd8699dcd11a
-  - enabled: 1
-    path: Assets/_aProtonTutorial/Scenes/Room for 4.unity
-    guid: c11deb75a27dbe646af6d3eea77307d1
+    path: Assets/Scenes/ProjectDevelopment.unity
+    guid: 2fcf7167c90854e438e45c94347f5bc1
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: a0d6e706988250d49960b0f467436caa,
       type: 2}

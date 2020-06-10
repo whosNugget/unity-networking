@@ -102,6 +102,7 @@ public class SimpleCharacterController : MonoBehaviour, InputControls.IDevDefaul
 	public void OnLook(InputAction.CallbackContext context) => lookDelta = context.performed ? context.ReadValue<Vector2>() * lookSensitivity : Vector2.zero;
 	public void OnJump(InputAction.CallbackContext context) => jump = context.performed;
 	public void OnFire(InputAction.CallbackContext context) => print("pew");
+	public void OnSprint(InputAction.CallbackContext context) => print("no sprint here");
 	#endregion
 
 	#region Coroutines

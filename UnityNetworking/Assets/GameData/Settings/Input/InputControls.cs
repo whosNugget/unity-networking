@@ -57,6 +57,14 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""3565e349-402d-4624-a86e-37a3a2a80003"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -213,6 +221,17 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ede80d5-f796-42d1-af59-6c942e43914f"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -243,6 +262,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         m_DevDefault_Jump = m_DevDefault.FindAction("Jump", throwIfNotFound: true);
         m_DevDefault_Fire = m_DevDefault.FindAction("Fire", throwIfNotFound: true);
         m_DevDefault_Look = m_DevDefault.FindAction("Look", throwIfNotFound: true);
+        m_DevDefault_Sprint = m_DevDefault.FindAction("Sprint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -297,6 +317,7 @@ public class @InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_DevDefault_Jump;
     private readonly InputAction m_DevDefault_Fire;
     private readonly InputAction m_DevDefault_Look;
+    private readonly InputAction m_DevDefault_Sprint;
     public struct DevDefaultActions
     {
         private @InputControls m_Wrapper;
@@ -306,6 +327,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_DevDefault_Jump;
         public InputAction @Fire => m_Wrapper.m_DevDefault_Fire;
         public InputAction @Look => m_Wrapper.m_DevDefault_Look;
+        public InputAction @Sprint => m_Wrapper.m_DevDefault_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_DevDefault; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,6 +352,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Look.started -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnLook;
+                @Sprint.started -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_DevDefaultActionsCallbackInterface.OnSprint;
             }
             m_Wrapper.m_DevDefaultActionsCallbackInterface = instance;
             if (instance != null)
@@ -349,6 +374,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
             }
         }
     }
@@ -369,5 +397,6 @@ public class @InputControls : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
 }

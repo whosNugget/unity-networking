@@ -8,7 +8,7 @@ using System.Collections;
 /// Controls a character's movement and animations using physics as the motion medium. Supports IK for the Legs/Feet and Arms/Hands, 
 /// and networks the position, rotation, animations and data using Photon.Pun
 /// </summary>
-[RequireComponent(typeof(Animator), typeof(Collider), typeof(Rigidbody))]
+[RequireComponent(typeof(Animator), typeof(Collider), typeof(CharacterController))]
 public class RootCharacterController : MonoBehaviourPunCallbacks, InputControls.IDevDefaultActions
 {
 	#region PUN Static Fields
@@ -38,9 +38,9 @@ public class RootCharacterController : MonoBehaviourPunCallbacks, InputControls.
 	[BoxGroup("Character Controller"), FoldoutGroup("Character Controller/Camera"), Range(0.01f, 5f)]
 	[SerializeField] float lookSensitivity = 0f;
 
-	[Tooltip("Drag the attached rigidbody will use when the character is moving through the air. High drag values can cause extended or permanent suspension in air")]
-	[BoxGroup("Character Controller"), FoldoutGroup("Character Controller/Forces"), Range(0, 500)]
-	[SerializeField] float aerialDrag = 0f;
+	//[Tooltip("Drag the attached rigidbody will use when the character is moving through the air. High drag values can cause extended or permanent suspension in air")]
+	//[BoxGroup("Character Controller"), FoldoutGroup("Character Controller/Forces"), Range(0, 500)]
+	//[SerializeField] float aerialDrag = 0f;
 
 	[Tooltip("Length of time the movement values will take to return to zero from their largest value. Adds a damping effect to animations when releasing input keys")]
 	[BoxGroup("Character Controller"), FoldoutGroup("Character Controller/Animations"), Range(0.1f, 10f)]
@@ -53,7 +53,8 @@ public class RootCharacterController : MonoBehaviourPunCallbacks, InputControls.
 
 	#region Private fields
 	Animator animator = null;
-	Rigidbody rb = null;
+	CharacterController controller = null;
+	//Rigidbody rb = null;
 	CharacterAnimationManager animManager;
 
 	InputControls controls = null;
@@ -88,7 +89,7 @@ public class RootCharacterController : MonoBehaviourPunCallbacks, InputControls.
 				targetCamera = Camera.main;
 			}
 
-			if (!TryGetComponent(out animator) || !TryGetComponent(out rb))
+			if (!TryGetComponent(out animator) || !TryGetComponent(out controller))
 				Debug.LogError($"{name}:{nameof(RootCharacterController)} could not get components of type [{nameof(Animator)}, {nameof(Rigidbody)}]; Ensure this gameobject has both components in the inspector, or that they are being created and added together");
 
 			controls = new InputControls();
@@ -97,30 +98,23 @@ public class RootCharacterController : MonoBehaviourPunCallbacks, InputControls.
 
 			animManager = new CharacterAnimationManager(ref animator);
 
-			rbGroundedDrag = rb.drag;
+			//rbGroundedDrag = rb.drag;
 		}
-		else rb.isKinematic = true; //Photon will serialize the rigidbody and transform
+		//else rb.isKinematic = true; //Photon will serialize the rigidbody and transform
 
 		forwardHash = Animator.StringToHash("Forward");
 		lateralHash = Animator.StringToHash("Lateral");
 		sprintHash = Animator.StringToHash("Sprint");
 	}
 
-	public override void OnEnable()
-	{
-		if (controls != null) controls.Enable();
-	}
-
-	public override void OnDisable()
-	{
-		controls.Disable();
-	}
+	public override void OnEnable() => controls?.Enable();
+	public override void OnDisable() => controls?.Disable();
 
 	private void Update()
 	{
 		if (photonView.IsMine && PhotonNetwork.IsConnected) //rely on Photon to synchronize character visuals exclusively
 		{
-			UpdateDrag();
+			//UpdateDrag();
 			UpdateCameraPosition();
 			UpdateCameraRotation();
 			UpdateCharacterRotation();
@@ -261,12 +255,12 @@ public class RootCharacterController : MonoBehaviourPunCallbacks, InputControls.
 
 		targetCamera.transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
 	}
-	void UpdateDrag()
-	{
-		if (Physics.SphereCast(transform.position, 0.001f, Vector3.down, out RaycastHit hit, 1f, LayerMask.NameToLayer("Ground")))
-			rb.drag = rbGroundedDrag;
-		else rb.drag = aerialDrag;
-	}
+	//void UpdateDrag()
+	//{
+	//	if (Physics.SphereCast(transform.position, 0.001f, Vector3.down, out RaycastHit hit, 1f, LayerMask.NameToLayer("Ground")))
+	//		rb.drag = rbGroundedDrag;
+	//	else rb.drag = aerialDrag;
+	//}
 	void UpdateCharacterRotation()
 	{
 		Vector3 rot = transform.rotation.eulerAngles;

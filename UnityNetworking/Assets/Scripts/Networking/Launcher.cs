@@ -60,11 +60,7 @@ namespace Nugget
 			Debug.Log($"{nameof(Launcher)}:{nameof(OnJoinedRoom)} was called by PUN. Client is now connected to a room");
 			controlPanel.SetActive(false);
 
-			if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
-			{
-				Debug.Log("Game scene will be loaded");
-				PhotonNetwork.LoadLevel("ProjectDevelopment");
-			}
+			PhotonNetwork.LoadLevel(1);
 		}
 		#endregion
 

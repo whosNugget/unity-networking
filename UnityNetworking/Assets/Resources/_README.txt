@@ -1,3 +1,3 @@
 This folder is deticated to project resources such as materials, textures, fonts, font assets, audio clips, models, animations, and other aesthetic and functional data. Additonally, because this project relies on Photon to connect to other Unity players, this folder will house prefab assets which will be instantiated by PhotonNetwork.Instantiate(). This can range anywhere from a simple 3D physics model that is created on a client keystroke, to a complex player prefab containing animations, textures, models and other information that allows clients to interact with the world and those around them.
 
-IMPORTATNT! If you have a prefab that will ever be instantiated through PhotonNetwork, it MUST be placed within this directory either directly or indirectly. This is a Photon requirement.
+IMPORTATNT! If you have a prefab that will ever be instantiated through PhotonNetwork, it MUST be placed within this directory directly. This is a Photon requirement.
